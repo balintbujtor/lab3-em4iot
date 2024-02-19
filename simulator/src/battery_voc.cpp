@@ -1,5 +1,5 @@
 #include "battery_voc.h"
-
+#include <math.h>
 
 void battery_voc::set_attributes()
 {
@@ -44,7 +44,7 @@ void battery_voc::processing()
     }
 
     // SOC and battery Voc relationship
-    v_oc.write(15.21*tmpsoc^5 - 44.36*tmpsoc^4 + 50.26*tmpsoc^3 - 27.22*tmpsoc^2 + 7.723*tmpsoc + 2.764); 
+    v_oc.write(15.21*pow(tmpsoc,5) - 44.36*pow(tmpsoc,4) + 50.26*pow(tmpsoc,3) - 27.22*pow(tmpsoc,2) + 7.723*tmpsoc + 2.764); 
 
     // SOC and battery internal resistance relationship
     r_s.write(5.294*exp(-8.03*tmpsoc) + 1.509*exp(-1.497*tmpsoc));
