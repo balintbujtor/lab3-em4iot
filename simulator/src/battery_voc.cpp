@@ -24,8 +24,7 @@ void battery_voc::processing()
     SOC_t = SOC_{t-1} - \int^{t}_{-inf} i(\tau) / C d\tau
     */
     
-    // nominal capacity * 3600 to convert from mAh to mAs
-    c_nom = 3200 * 3600;
+    c_nom = 3200;
     tmpsoc -= (((tmpcurrent + prev_i_batt) * SIM_STEP) / (2 * 3600 * c_nom)); // 3600 * Cnom, mAh to mAs cause [sim step] = [s]
     prev_i_batt = tmpcurrent; // Update
 
@@ -44,10 +43,13 @@ void battery_voc::processing()
     }
 
     // SOC and battery Voc relationship
-    v_oc.write(15.21*pow(tmpsoc,5) - 44.36*pow(tmpsoc,4) + 50.26*pow(tmpsoc,3) - 27.22*pow(tmpsoc,2) + 7.723*tmpsoc + 2.764); 
+    //p1*x^3 + p2*x^2 + p3*x + p4
+    v_oc.write(1.819*pow(tmpsoc,3) - 3.048*pow(tmpsoc,2) + 2.458*tmpsoc + 2.927);
+
 
     // SOC and battery internal resistance relationship
-    r_s.write(5.294*exp(-8.03*tmpsoc) + 1.509*exp(-1.497*tmpsoc));
+    // p1*x^3 + p2*x^2 + p3*x + p4
+    r_s.write(2.832e-05*pow(tmpsoc,3) + 3.447e-05*pow(tmpsoc,2) - 0.0001233*tmpsoc + 0.0001255);
 
     // When the battery SOC decreases under 1%, the simulation stops.	
     if(tmpsoc <= 0.01)
