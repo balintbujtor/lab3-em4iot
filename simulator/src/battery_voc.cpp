@@ -23,7 +23,9 @@ void battery_voc::processing()
     Compute actual state-of-charge solving the integral:
     SOC_t = SOC_{t-1} - \int^{t}_{-inf} i(\tau) / C d\tau
     */
-    c_nom = TO-BE-FILLED
+    
+    // nominal capacity * 3600 to convert from mAh to mAs
+    c_nom = 3200 * 3600;
     tmpsoc -= (((tmpcurrent + prev_i_batt) * SIM_STEP) / (2 * 3600 * c_nom)); // 3600 * Cnom, mAh to mAs cause [sim step] = [s]
     prev_i_batt = tmpcurrent; // Update
 
@@ -42,10 +44,10 @@ void battery_voc::processing()
     }
 
     // SOC and battery Voc relationship
-    v_oc.write(TO-BE-FILLED); // Place interpolated funct here
+    v_oc.write(15.21*tmpsoc^5 - 44.36*tmpsoc^4 + 50.26*tmpsoc^3 - 27.22*tmpsoc^2 + 7.723*tmpsoc + 2.764); 
 
     // SOC and battery internal resistance relationship
-    r_s.write(TO-BE-FILLED); // Place interpolated funct here
+    r_s.write(5.294*exp(-8.03*tmpsoc) + 1.509*exp(-1.497*tmpsoc));
 
     // When the battery SOC decreases under 1%, the simulation stops.	
     if(tmpsoc <= 0.01)

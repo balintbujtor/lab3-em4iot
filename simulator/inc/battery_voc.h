@@ -23,4 +23,5 @@ SCA_TDF_MODULE(battery_voc)
     private:
         double tmpsoc;
         double prev_i_batt;
+        double c_nom;
 };
