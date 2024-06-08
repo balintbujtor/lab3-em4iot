@@ -11,7 +11,7 @@
 #include "methane_sensor.h"
 #include "temperature_sensor.h"
 #include "mic_click_sensor.h"
-
+#include "supercapacitor.h"
 
 int sc_main(int argc, char* argv[])
 {
@@ -26,6 +26,8 @@ int sc_main(int argc, char* argv[])
     sca_tdf::sca_signal<double> v_pv, i_pv, real_i_pv;
     sca_tdf::sca_signal<double> i_tot;
 
+    sca_tdf::sca_signal<double> i_sc, v_sc;
+    
     // Instantiate modules
     bus bus("bus");
     battery battery("battery");
@@ -38,6 +40,8 @@ int sc_main(int argc, char* argv[])
     methane_sensor methane_sensor("methane_sensor");
     temperature_sensor temperature_sensor("temperature_sensor");
     mic_click_sensor mic_click_sensor("mic_click_sensor");
+
+    supercapacitor supercapacitor("supercapacitor");
     
     // Connect signals to modules
     battery.i_batt(i_batt);
@@ -79,17 +83,17 @@ int sc_main(int argc, char* argv[])
     // the following signals will be traced. Comment any signal you don't want to trace    
     sca_util::sca_trace(atf, soc, "soc" );
     sca_util::sca_trace(atf, i_tot, "i_tot" );
-    sca_util::sca_trace(atf, i_mcu, "i_mcu" );
-    sca_util::sca_trace(atf, i_rf, "i_rf" );
-    sca_util::sca_trace(atf, i_pv, "i_pv" );
-    sca_util::sca_trace(atf, v_pv, "v_pv" );
-    sca_util::sca_trace(atf, real_i_pv, "real_i_pv" );
+    //sca_util::sca_trace(atf, i_mcu, "i_mcu" );
+    //sca_util::sca_trace(atf, i_rf, "i_rf" );
+    //sca_util::sca_trace(atf, i_pv, "i_pv" );
+    //sca_util::sca_trace(atf, v_pv, "v_pv" );
+    //sca_util::sca_trace(atf, real_i_pv, "real_i_pv" );
     sca_util::sca_trace(atf, i_batt, "i_batt" );
     sca_util::sca_trace(atf, v_batt, "v_batt" );
-    sca_util::sca_trace(atf, i_air_quality_sensor, "i_air_quality_sensor" );
-    sca_util::sca_trace(atf, i_methane_sensor, "i_methane_sensor" );
-    sca_util::sca_trace(atf, i_temperature_sensor, "i_temperature_sensor" );
-    sca_util::sca_trace(atf, i_mic_click_sensor, "i_mic_click_sensor" );
+    //sca_util::sca_trace(atf, i_air_quality_sensor, "i_air_quality_sensor" );
+    //sca_util::sca_trace(atf, i_methane_sensor, "i_methane_sensor" );
+    //sca_util::sca_trace(atf, i_temperature_sensor, "i_temperature_sensor" );
+    //sca_util::sca_trace(atf, i_mic_click_sensor, "i_mic_click_sensor" );
     cout<<"The simulation starts!"<<endl;
 
     sc_start(SIM_LEN, sc_core::SC_SEC); // Set the simulation length

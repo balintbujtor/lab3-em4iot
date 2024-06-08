@@ -23,7 +23,7 @@ void converter_supercapacitor::processing()
     // Avoid div by zero
     if (v_sc_tmp == 0)
     {
-        v_sc_tmp = 2.7; //maybe has to be changed
+        v_sc_tmp = 3.3; //maybe has to be changed
     }
 
     i_sc.write(i_bus_tmp * VREF_BUS / (eta * v_sc_tmp));
