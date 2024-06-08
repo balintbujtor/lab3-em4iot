@@ -18,6 +18,10 @@ void bus::processing()
     double tot_scavenged = real_i_pv.read();
 
     double tot_requested = tot_consumed - tot_scavenged;
+    
+    double tot_batt_requested = 0.9 * tot_requested;
+    double tot_sc_requested = tot_requested - tot_batt_requested;
 
-    i_tot.write(tot_requested); // tot_requested >= 0 ? pow_from_battery : pow_to_battery
+    i_tot_batt.write(tot_batt_requested); // tot_requested >= 0 ? pow_from_battery : pow_to_battery
+    i_tot_sc.write(tot_sc_requested); 
 }

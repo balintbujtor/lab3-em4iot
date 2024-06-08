@@ -12,6 +12,7 @@
 #include "temperature_sensor.h"
 #include "mic_click_sensor.h"
 #include "supercapacitor.h"
+#include "converter_supercapacitor.h"
 
 int sc_main(int argc, char* argv[])
 {
@@ -24,10 +25,10 @@ int sc_main(int argc, char* argv[])
     sca_tdf::sca_signal<double> i_mcu;
     sca_tdf::sca_signal<double> i_rf;
     sca_tdf::sca_signal<double> v_pv, i_pv, real_i_pv;
-    sca_tdf::sca_signal<double> i_tot;
+    sca_tdf::sca_signal<double> i_tot_batt, i_tot_sc;
 
     sca_tdf::sca_signal<double> i_sc, v_sc;
-    
+
     // Instantiate modules
     bus bus("bus");
     battery battery("battery");
@@ -42,13 +43,23 @@ int sc_main(int argc, char* argv[])
     mic_click_sensor mic_click_sensor("mic_click_sensor");
 
     supercapacitor supercapacitor("supercapacitor");
-    
+    converter_supercapacitor converter_supercapacitor("converter_supercapacitor");
+
+    supercapacitor.in(i_sc);
+    supercapacitor.out(v_sc);
+
+    converter_supercapacitor.i_bus(i_tot_sc);
+    converter_supercapacitor.v_sc(v_sc);
+    converter_supercapacitor.i_sc(i_sc);
+
+    // TODO: fix i tot
+
     // Connect signals to modules
     battery.i_batt(i_batt);
     battery.v_batt(v_batt);
     battery.soc(soc);
 
-    converter_battery.i_bus(i_tot);
+    converter_battery.i_bus(i_tot_batt);
     converter_battery.v_batt(v_batt);
     converter_battery.i_batt(i_batt);
     
@@ -71,7 +82,10 @@ int sc_main(int argc, char* argv[])
     bus.i_mcu(i_mcu);
     bus.i_rf(i_rf);
     bus.real_i_pv(real_i_pv);
-    bus.i_tot(i_tot);
+
+    bus.i_tot_batt(i_tot_batt);
+    bus.i_tot_sc(i_tot_sc);
+
     bus.i_air_quality_sensor(i_air_quality_sensor);
     bus.i_methane_sensor(i_methane_sensor);
     bus.i_temperature_sensor(i_temperature_sensor);
@@ -82,7 +96,11 @@ int sc_main(int argc, char* argv[])
 
     // the following signals will be traced. Comment any signal you don't want to trace    
     sca_util::sca_trace(atf, soc, "soc" );
-    sca_util::sca_trace(atf, i_tot, "i_tot" );
+    sca_util::sca_trace(atf, i_tot_batt, "i_tot_battery" );
+    sca_util::sca_trace(atf, i_tot_sc, "i_tot_sc" );
+    sca_util::sca_trace(atf, i_sc, "i_sc" );
+    sca_util::sca_trace(atf, v_sc, "v_sc" );
+
     //sca_util::sca_trace(atf, i_mcu, "i_mcu" );
     //sca_util::sca_trace(atf, i_rf, "i_rf" );
     //sca_util::sca_trace(atf, i_pv, "i_pv" );
@@ -94,6 +112,7 @@ int sc_main(int argc, char* argv[])
     //sca_util::sca_trace(atf, i_methane_sensor, "i_methane_sensor" );
     //sca_util::sca_trace(atf, i_temperature_sensor, "i_temperature_sensor" );
     //sca_util::sca_trace(atf, i_mic_click_sensor, "i_mic_click_sensor" );
+    cout<<"THIS IS THE LATEST VERSION OF THE SIMULATOR"<<endl;
     cout<<"The simulation starts!"<<endl;
 
     sc_start(SIM_LEN, sc_core::SC_SEC); // Set the simulation length

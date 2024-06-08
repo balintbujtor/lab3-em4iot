@@ -13,9 +13,11 @@ SCA_TDF_MODULE(bus)
     sca_tdf::sca_in<double> i_mic_click_sensor; // Requested current from mic_click_sensor
     sca_tdf::sca_in<double> real_i_pv; // Provided current from pv panel after conversion
 
-    sca_tdf::sca_out<double> i_tot;
+    sca_tdf::sca_out<double> i_tot_batt;
+    sca_tdf::sca_out<double> i_tot_sc;
 
-    SCA_CTOR(bus): i_tot("i_tot"),
+    SCA_CTOR(bus): i_tot_batt("i_tot_batt"),
+                   i_tot_sc("i_tot_sc"),
                    i_mcu("i_mcu"),
                    i_rf("i_rf"),
                    i_air_quality_sensor("i_air_quality_sensor"),
