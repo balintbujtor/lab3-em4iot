@@ -27,3 +27,5 @@ void converter_supercapacitor::processing()
     }
 
     i_sc.write(i_bus_tmp * VREF_BUS / (eta * v_sc_tmp));
+
+}
