@@ -14,7 +14,8 @@ void bus::processing()
                           + i_temperature_sensor.read()
                           + i_mic_click_sensor.read()
                           ;
-    double tot_scavenged = real_i_pv1.read() + real_i_pv2.read() + real_i_pv3.read();
+
+    double tot_scavenged = real_i_pv.read();
 
     double tot_requested = tot_consumed - tot_scavenged;
 
