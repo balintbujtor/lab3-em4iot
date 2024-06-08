@@ -16,4 +16,4 @@ SCA_TDF_MODULE(converter_supercapacitor)
     void initialize();
     void processing();
 
-}
+};
