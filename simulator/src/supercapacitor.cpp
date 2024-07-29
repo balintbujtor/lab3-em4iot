@@ -6,8 +6,8 @@ supercapacitor::supercapacitor(
     double Rl_val,
     double Rs_val 
 ):
-    in("in"),
-    out("out"),
+    I("I"),
+    V("V"),
     iin("iin"),
     vout("vout"),
     C_sc("C_sc", C_val),
@@ -19,13 +19,13 @@ supercapacitor::supercapacitor(
 
 {
     // Connect the in and out interfaces
-    iin.inp(in);
+    iin.inp(I);
     iin.p(node_top);
     iin.n(gnd);
 
     vout.p(node_top);
     vout.n(gnd);
-    vout.outp(out);
+    vout.outp(V);
 
     // Connect the components
     C_sc.p(node_top);

@@ -16,4 +16,8 @@ SCA_TDF_MODULE(converter_supercapacitor)
     void initialize();
     void processing();
 
+    private:
+        const double eta = 0.75; // Efficiency
+        double i_bus_tmp;
+        double v_sc_tmp;
 };

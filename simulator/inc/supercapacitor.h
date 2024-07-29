@@ -7,8 +7,8 @@
 SC_MODULE(supercapacitor)
 {
     // Interface and internal components declaration
-    sca_tdf::sca_in<double> in; // Requested supercapacitor current
-    sca_tdf::sca_out<double> out; // Provided supercapacitor voltage
+    sca_tdf::sca_in<double> I; // Requested supercapacitor current
+    sca_tdf::sca_out<double> V; // Provided supercapacitor voltage
 
     // transformers bw ELN and TDF
     sca_eln::sca_tdf::sca_isource iin;
@@ -22,7 +22,6 @@ SC_MODULE(supercapacitor)
     const double C = 3; // Capacitance (F)
     const double Rl = 500000; // Leakage resistance (Ohm)
     const double Rs = 0.08; // Series resistance (Ohm)
-
     // Constructor
     supercapacitor( 
         sc_core::sc_module_name nm,

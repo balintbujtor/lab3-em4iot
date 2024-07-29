@@ -45,9 +45,8 @@ int sc_main(int argc, char* argv[])
     supercapacitor supercapacitor("supercapacitor");
     converter_supercapacitor converter_supercapacitor("converter_supercapacitor");
 
-    supercapacitor.in(i_sc);
-    supercapacitor.out(v_sc);
-
+    supercapacitor.I(i_sc);
+    supercapacitor.V(v_sc);
     converter_supercapacitor.i_bus(i_tot_sc);
     converter_supercapacitor.v_sc(v_sc);
     converter_supercapacitor.i_sc(i_sc);
@@ -95,8 +94,9 @@ int sc_main(int argc, char* argv[])
     sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file("sim_trace.txt");
 
     // the following signals will be traced. Comment any signal you don't want to trace    
-    sca_util::sca_trace(atf, soc, "soc" );
-    sca_util::sca_trace(atf, i_tot_batt, "i_tot_battery" );
+    //sca_util::sca_trace(atf, soc, "soc" );
+    //sca_util::sca_trace(atf, i_tot_batt, "i_tot_battery" );
+    
     sca_util::sca_trace(atf, i_tot_sc, "i_tot_sc" );
     sca_util::sca_trace(atf, i_sc, "i_sc" );
     sca_util::sca_trace(atf, v_sc, "v_sc" );
@@ -106,8 +106,8 @@ int sc_main(int argc, char* argv[])
     //sca_util::sca_trace(atf, i_pv, "i_pv" );
     //sca_util::sca_trace(atf, v_pv, "v_pv" );
     //sca_util::sca_trace(atf, real_i_pv, "real_i_pv" );
-    sca_util::sca_trace(atf, i_batt, "i_batt" );
-    sca_util::sca_trace(atf, v_batt, "v_batt" );
+    //sca_util::sca_trace(atf, i_batt, "i_batt" );
+    //sca_util::sca_trace(atf, v_batt, "v_batt" );
     //sca_util::sca_trace(atf, i_air_quality_sensor, "i_air_quality_sensor" );
     //sca_util::sca_trace(atf, i_methane_sensor, "i_methane_sensor" );
     //sca_util::sca_trace(atf, i_temperature_sensor, "i_temperature_sensor" );

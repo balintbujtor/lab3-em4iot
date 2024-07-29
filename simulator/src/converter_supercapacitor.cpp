@@ -12,20 +12,15 @@ void converter_supercapacitor::initialize() {}
 
 void converter_supercapacitor::processing()
 {
-    const double eta = 0.75; // Efficiency
-    double i_bus_tmp;
-    double v_sc_tmp;
-
     // Read input quantities
     i_bus_tmp = i_bus.read();
     v_sc_tmp = v_sc.read();
 
-    // Avoid div by zero
-    if (v_sc_tmp == 0)
-    {
-        v_sc_tmp = 3.3; //maybe has to be changed
-    }
-
     i_sc.write(i_bus_tmp * VREF_BUS / (eta * v_sc_tmp));
+    // Read input quantities
+    double E_tmp = 0.5 * 3 * v_sc_tmp * v_sc_tmp;
+    double E_max = 0.5 * 3 * 2.7 * 2.7;
+
+    cout << "E_tmp: " << E_tmp << " SOC: " << E_tmp / E_max << endl;
 
 }
