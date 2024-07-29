@@ -12,7 +12,6 @@
 #include "temperature_sensor.h"
 #include "mic_click_sensor.h"
 #include "supercapacitor.h"
-#include "converter_supercapacitor.h"
 
 int sc_main(int argc, char* argv[])
 {
@@ -43,13 +42,9 @@ int sc_main(int argc, char* argv[])
     mic_click_sensor mic_click_sensor("mic_click_sensor");
 
     supercapacitor supercapacitor("supercapacitor");
-    converter_supercapacitor converter_supercapacitor("converter_supercapacitor");
 
     supercapacitor.I(i_sc);
     supercapacitor.V(v_sc);
-    converter_supercapacitor.i_bus(i_tot_sc);
-    converter_supercapacitor.v_sc(v_sc);
-    converter_supercapacitor.i_sc(i_sc);
 
     // TODO: fix i tot
 

@@ -1,6 +1,6 @@
 #include "supercapacitor.h"
 
-supercapacitor::supercapacitor( 
+supercapacitor_eln::supercapacitor_eln( 
     sc_core::sc_module_name nm,
     double C_val,
     double Rl_val,
@@ -37,4 +37,22 @@ supercapacitor::supercapacitor(
     R_s.p(node_mid);
     R_s.n(gnd);
 
+}
+
+
+void supercapacitor::set_attributes()
+{
+    i.set_timestep(SIM_STEP, sc_core::SC_SEC);
+    v.set_timestep(SIM_STEP, sc_core::SC_SEC);
+    e.set_timestep(SIM_STEP, sc_core::SC_SEC);
+    soc.set_timestep(SIM_STEP, sc_core::SC_SEC);
+}
+
+void supercapacitor::initialize(){}
+
+void supercapacitor::processing()
+{
+    double tmpvoltage;
+
+    tmpvoltage = supercapacitor_eln_inst.v.read();
 }
