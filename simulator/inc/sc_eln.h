@@ -1,5 +1,4 @@
 #include <systemc-ams.h>
-#include "config.h"
 
 SC_MODULE(sc_eln)
 {
@@ -23,7 +22,7 @@ SC_MODULE(sc_eln)
             pV_out("pV_out"),
             iin("iin"),
             vout("vout"),
-            C_sc("C_sc", c_par, c_par * VREF_BUS),
+            C_sc("C_sc", c_par),
             R_l("R_l", r_l_par),
             R_s("R_s", r_s_par),
             node_top("node_top"),

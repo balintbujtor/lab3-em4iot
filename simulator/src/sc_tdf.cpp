@@ -7,15 +7,12 @@ void sc_tdf::set_attributes()
     pSoC_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pV_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 
-    pV_in.set_delay(1);
-    pE_out.set_delay(1);
-    pSoC_out.set_delay(1);
-    pV_out.set_delay(1);
-    // TODO: check if the delay is needed
+    //pE_out.set_delay(1);
+    //pSoC_out.set_delay(1);
+    //pV_out.set_delay(1);
 }
 
 void sc_tdf::initialize(){}
-// TODO: check if the initialization is needed
 
 void sc_tdf::processing()
 {
@@ -45,7 +42,7 @@ void sc_tdf::processing()
     
     if(SoC_val <= 0.01)
     {
-        cout << "SOC is less than or equal to 1%:" << " @" << sc_time_stamp() << endl;
+        cout << "SC SOC is less than or equal to 1%:" << " @" << sc_time_stamp() << endl;
         sc_stop();
     }
 

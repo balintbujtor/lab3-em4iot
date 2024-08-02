@@ -1,6 +1,3 @@
-#ifndef SUPERCAPACITOR_H
-#define SUPERCAPACITOR_H
-
 #include <systemc-ams.h>
 #include "config.h"
 
@@ -37,5 +34,3 @@ SC_MODULE(sc_tdf)
         double SoC_val;
         double E_val;
 };
-
-#endif // SUPERCAPACITOR_H
