@@ -5,7 +5,7 @@
 #include "converter_battery.h"
 #include "mcu.h"
 #include "air_quality_sensor.h"
-#include "supercapacitor.h"
+#include "sc.h"
 
 int sc_main(int argc, char* argv[])
 {
@@ -15,7 +15,7 @@ int sc_main(int argc, char* argv[])
     sca_tdf::sca_signal<double> i_mcu;
     sca_tdf::sca_signal<double> i_tot_batt, i_tot_sc;
 
-    sca_tdf::sca_signal<double> i_sc, v_sc;
+    sca_tdf::sca_signal<double> i_sc, v_sc, e_sc, soc_sc;
 
     // Instantiate modules
     bus bus("bus");
@@ -24,10 +24,12 @@ int sc_main(int argc, char* argv[])
     mcu mcu("mcu");
     air_quality_sensor air_quality_sensor("air_quality_sensor");
 
-    supercapacitor supercapacitor("supercapacitor");
+    supercapacitor sc_module("supercapacitor");
 
-    supercapacitor.I(i_sc);
-    supercapacitor.V(v_sc);
+    sc_module.pI_in(i_tot_sc);
+    sc_module.pV_out(v_sc);
+    sc_module.pE_out(e_sc);
+    sc_module.pSoC_out(soc_sc);
 
     // Connect signals to modules
     battery.i_batt(i_batt);
@@ -54,9 +56,9 @@ int sc_main(int argc, char* argv[])
     sca_util::sca_trace(atf, i_tot_sc, "i_tot_sc" );
     sca_util::sca_trace(atf, i_sc, "i_sc" );
     sca_util::sca_trace(atf, v_sc, "v_sc" );
+    sca_util::sca_trace(atf, e_sc, "e_sc" );
+    sca_util::sca_trace(atf, soc_sc, "soc_sc" );
 
-
-    cout<<"THIS IS THE LATEST VERSION OF THE SIMULATOR"<<endl;
     cout<<"The simulation starts!"<<endl;
 
     sc_start(SIM_LEN, sc_core::SC_SEC); // Set the simulation length
