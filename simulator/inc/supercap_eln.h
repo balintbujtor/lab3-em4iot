@@ -1,6 +1,6 @@
 #include <systemc-ams.h>
 
-SC_MODULE(sc_eln)
+SC_MODULE(supercap_eln)
 {
     public:
         // Interface and internal components declaration
@@ -17,7 +17,7 @@ SC_MODULE(sc_eln)
         sca_eln::sca_r R_s; // Series resistance
 
         // Constructor
-        sc_eln( sc_core::sc_module_name nm, double c_par, double r_l_par, double r_s_par):
+        supercap_eln( sc_core::sc_module_name nm, double c_par, double r_l_par, double r_s_par):
             pI_in("pI_in"),
             pV_out("pV_out"),
             iin("iin"),

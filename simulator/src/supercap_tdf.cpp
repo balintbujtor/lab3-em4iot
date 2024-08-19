@@ -1,6 +1,6 @@
-#include "sc_tdf.h"
+#include "supercap_tdf.h"
 
-void sc_tdf::set_attributes()
+void supercap_tdf::set_attributes()
 {
     pV_in.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pE_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
@@ -12,9 +12,9 @@ void sc_tdf::set_attributes()
     //pV_out.set_delay(1);
 }
 
-void sc_tdf::initialize(){}
+void supercap_tdf::initialize(){}
 
-void sc_tdf::processing()
+void supercap_tdf::processing()
 {
 
     double tmp_v;

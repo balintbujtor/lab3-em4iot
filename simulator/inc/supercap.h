@@ -1,6 +1,6 @@
 #include <systemc-ams.h>
-#include "sc_eln.h"
-#include "sc_tdf.h"
+#include "supercap_eln.h"
+#include "supercap_tdf.h"
 #include "config.h"
 
 SC_MODULE(supercapacitor)
@@ -14,8 +14,8 @@ SC_MODULE(supercapacitor)
         // connecting signals
         sca_tdf::sca_signal<double> sVoltage;
 
-        sc_eln eln_module;
-        sc_tdf tdf_module;
+        supercap_eln eln_module;
+        supercap_tdf tdf_module;
 
         supercapacitor( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 500000.0, double r_s_par = 0.08): 
                                 pI_in("pI_in"),
@@ -25,8 +25,8 @@ SC_MODULE(supercapacitor)
                                 eln_module("eln_module", c_par, r_l_par, r_s_par),
                                 tdf_module("tdf_module", c_par)
         {
-            //eln_module = new sc_eln('eln_module', c_val, r_l_val, r_s_val);
-            //tdf_module = new sc_tdf('tdf_module', c_val);
+            //eln_module = new supercap_eln('eln_module', c_val, r_l_val, r_s_val);
+            //tdf_module = new supercap_tdf('tdf_module', c_val);
 
             eln_module.pI_in(pI_in);
             eln_module.pV_out(sVoltage);

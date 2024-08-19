@@ -1,7 +1,7 @@
 #include <systemc-ams.h>
 #include "config.h"
 
-SC_MODULE(sc_tdf)
+SC_MODULE(supercap_tdf)
 {
     public:
         // Ports
@@ -11,7 +11,7 @@ SC_MODULE(sc_tdf)
         sca_tdf::sca_out<double> pE_out; //current energy
         sca_tdf::sca_out<double> pSoC_out; //state of charge
 
-        sc_tdf( sc_core::sc_module_name nm, double c_par): 
+        supercap_tdf( sc_core::sc_module_name nm, double c_par): 
                                 pV_in("pV_in"),
                                 pV_out("pV_out"), 
                                 pE_out("pE_out"),

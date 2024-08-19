@@ -1,16 +1,16 @@
 #include <math.h>
-#include "sc_converter.h"
+#include "supercap_converter.h"
 
 
-void sc_converter::set_attributes()
+void supercap_converter::set_attributes()
 {
     pI_sc.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pI_sc.set_delay(1);
 }
 
-void sc_converter::initialize() {}
+void supercap_converter::initialize() {}
 
-void sc_converter::processing()
+void supercap_converter::processing()
 {
     // Read input quantities
     i_bus_tmp = pI_bus.read();

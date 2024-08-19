@@ -5,7 +5,7 @@
 #include "converter_battery.h"
 #include "mcu.h"
 #include "air_quality_sensor.h"
-#include "sc.h"
+#include "supercap.h"
 
 int sc_main(int argc, char* argv[])
 {
