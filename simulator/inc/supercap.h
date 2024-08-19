@@ -3,7 +3,7 @@
 #include "supercap_tdf.h"
 #include "config.h"
 
-SC_MODULE(supercapacitor)
+SC_MODULE(supercap)
 {
     public:
         sca_tdf::sca_in<double> pI_in; // Battery current
@@ -17,7 +17,7 @@ SC_MODULE(supercapacitor)
         supercap_eln eln_module;
         supercap_tdf tdf_module;
 
-        supercapacitor( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 500000.0, double r_s_par = 0.08): 
+        supercap( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 500000.0, double r_s_par = 0.08): 
                                 pI_in("pI_in"),
                                 pV_out("pV_out"),
                                 pE_out("pE_out"),

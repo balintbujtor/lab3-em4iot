@@ -24,12 +24,12 @@ int sc_main(int argc, char* argv[])
     mcu mcu("mcu");
     air_quality_sensor air_quality_sensor("air_quality_sensor");
 
-    supercapacitor sc_module("supercapacitor");
+    supercap supercap_module("supercap");
 
-    sc_module.pI_in(i_tot_sc);
-    sc_module.pV_out(v_sc);
-    sc_module.pE_out(e_sc);
-    sc_module.pSoC_out(soc_sc);
+    supercap_module.pI_in(i_tot_sc);
+    supercap_module.pV_out(v_sc);
+    supercap_module.pE_out(e_sc);
+    supercap_module.pSoC_out(soc_sc);
 
     // Connect signals to modules
     battery.i_batt(i_batt);
