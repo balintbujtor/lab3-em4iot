@@ -1,3 +1,6 @@
+#ifndef SUPERCAP_TDF_H
+#define SUPERCAP_TDF_H
+
 #include <systemc-ams.h>
 #include "config.h"
 
@@ -21,6 +24,7 @@ SC_MODULE(supercap_tdf)
                                 SoC_val(SOC_INIT),
                                 E_val(SoC_val * MAX_E) 
         {
+            cout << "Supercapacitor TDF created, C:"<< C << ", MAX_E:" << MAX_E << ", SoC:" << SoC_val << ", E:" << E_val << endl;
 
         }
 
@@ -34,3 +38,5 @@ SC_MODULE(supercap_tdf)
         double SoC_val;
         double E_val;
 };
+
+#endif

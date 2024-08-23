@@ -1,3 +1,6 @@
+#ifndef SUPERCAP_ELN_H
+#define SUPERCAP_ELN_H
+
 #include <systemc-ams.h>
 
 SC_MODULE(supercap_eln)
@@ -45,6 +48,8 @@ SC_MODULE(supercap_eln)
 
             R_s.p(node_mid);
             R_s.n(gnd);
+
+            cout << "Supercapacitor created, C:" << C_sc.value << ", R_l:" << R_l.value << ", R_s:" << R_s.value << endl;
         }
 
     private:
@@ -53,3 +58,5 @@ SC_MODULE(supercap_eln)
         sca_eln::sca_node node_top, node_mid;
         sca_eln::sca_node_ref gnd;
 };
+
+#endif

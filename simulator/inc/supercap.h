@@ -1,3 +1,6 @@
+#ifndef SUPERCAP_H
+#define SUPERCAP_H
+
 #include <systemc-ams.h>
 #include "supercap_eln.h"
 #include "supercap_tdf.h"
@@ -25,8 +28,6 @@ SC_MODULE(supercap)
                                 eln_module("eln_module", c_par, r_l_par, r_s_par),
                                 tdf_module("tdf_module", c_par)
         {
-            //eln_module = new supercap_eln('eln_module', c_val, r_l_val, r_s_val);
-            //tdf_module = new supercap_tdf('tdf_module', c_val);
 
             eln_module.pI_in(pI_in);
             eln_module.pV_out(sVoltage);
@@ -40,3 +41,5 @@ SC_MODULE(supercap)
 };
 
 //TODO: test with the simulator
+
+#endif

@@ -15,7 +15,10 @@ int sc_main(int argc, char* argv[])
     sca_tdf::sca_signal<double> i_mcu;
     sca_tdf::sca_signal<double> i_tot_batt, i_tot_sc;
 
-    sca_tdf::sca_signal<double> i_sc, v_sc, e_sc, soc_sc;
+    //sca_tdf::sca_signal<double> i_supercap;
+    sca_tdf::sca_signal<double> v_supercap;
+    sca_tdf::sca_signal<double> e_supercap;
+    sca_tdf::sca_signal<double> soc_supercap;
 
     // Instantiate modules
     bus bus("bus");
@@ -27,9 +30,9 @@ int sc_main(int argc, char* argv[])
     supercap supercap_module("supercap");
 
     supercap_module.pI_in(i_tot_sc);
-    supercap_module.pV_out(v_sc);
-    supercap_module.pE_out(e_sc);
-    supercap_module.pSoC_out(soc_sc);
+    supercap_module.pV_out(v_supercap);
+    supercap_module.pE_out(e_supercap);
+    supercap_module.pSoC_out(soc_supercap);
 
     // Connect signals to modules
     battery.i_batt(i_batt);
@@ -54,10 +57,9 @@ int sc_main(int argc, char* argv[])
 
     // the following signals will be traced. Comment any signal you don't want to trace     
     sca_util::sca_trace(atf, i_tot_sc, "i_tot_sc" );
-    sca_util::sca_trace(atf, i_sc, "i_sc" );
-    sca_util::sca_trace(atf, v_sc, "v_sc" );
-    sca_util::sca_trace(atf, e_sc, "e_sc" );
-    sca_util::sca_trace(atf, soc_sc, "soc_sc" );
+    sca_util::sca_trace(atf, v_supercap, "v_supercap" );
+    sca_util::sca_trace(atf, e_supercap, "e_supercap" );
+    sca_util::sca_trace(atf, soc_supercap, "soc_supercap" );
 
     cout<<"The simulation starts!"<<endl;
 

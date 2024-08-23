@@ -2,14 +2,13 @@
 
 void supercap_tdf::set_attributes()
 {
-    pV_in.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pE_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pSoC_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pV_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 
-    //pE_out.set_delay(1);
-    //pSoC_out.set_delay(1);
-    //pV_out.set_delay(1);
+    pE_out.set_delay(1);
+    pSoC_out.set_delay(1);
+    pV_out.set_delay(1);
 }
 
 void supercap_tdf::initialize(){}
@@ -20,6 +19,7 @@ void supercap_tdf::processing()
     double tmp_v;
 
     tmp_v = pV_in.read();
+    cout << "Voltage value: " << tmp_v << " @" << sc_time_stamp() << endl;
 
     if(tmp_v <= 0)
     {
