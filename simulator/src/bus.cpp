@@ -10,14 +10,18 @@ void bus::processing()
     const double supercap_limit = 225; // mA for 40s supply
     const double supercap_request_threshold = 30; //above this we use the supercap
 
-    double tot_requested, tot_consumed, tot_batt_requested, tot_sc_requested;
+    double tot_requested, tot_consumed, tot_batt_requested, tot_sc_requested, tot_scavenged;
 
     // Compute total current consumption
-    tot_consumed = i_mcu.read()
+    tot_consumed = i_mcu.read() + i_rf.read()
                           + i_air_quality_sensor.read()
+                          + i_methane_sensor.read()
+                          + i_temperature_sensor.read()
+                          + i_mic_click_sensor.read()
                           ;
+    tot_scavenged = real_i_pv1.read();
 
-    tot_requested = tot_consumed;
+    tot_requested = tot_consumed - tot_scavenged;
 
     if(tot_requested > supercap_request_threshold && tot_requested < supercap_limit){
         tot_sc_requested = tot_requested;
