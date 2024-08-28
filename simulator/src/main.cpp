@@ -6,6 +6,7 @@
 #include "mcu.h"
 #include "air_quality_sensor.h"
 #include "supercap.h"
+#include "supercap_converter.h"
 
 int sc_main(int argc, char* argv[])
 {
@@ -15,7 +16,7 @@ int sc_main(int argc, char* argv[])
     sca_tdf::sca_signal<double> i_mcu;
     sca_tdf::sca_signal<double> i_tot_batt, i_tot_sc;
 
-    //sca_tdf::sca_signal<double> i_supercap;
+    sca_tdf::sca_signal<double> i_supercap;
     sca_tdf::sca_signal<double> v_supercap;
     sca_tdf::sca_signal<double> e_supercap;
     sca_tdf::sca_signal<double> soc_supercap;
@@ -28,8 +29,12 @@ int sc_main(int argc, char* argv[])
     air_quality_sensor air_quality_sensor("air_quality_sensor");
 
     supercap supercap_module("supercap");
+    supercap_converter supercap_converter_module("supercap_converter");
 
-    supercap_module.pI_in(i_tot_sc);
+    supercap_converter_module.pI_bus(i_tot_sc);
+    supercap_converter_module.pI_sc(i_supercap);
+
+    supercap_module.pI_in(i_supercap);
     supercap_module.pV_out(v_supercap);
     supercap_module.pE_out(e_supercap);
     supercap_module.pSoC_out(soc_supercap);
@@ -55,11 +60,13 @@ int sc_main(int argc, char* argv[])
     // define simulation file
     sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file("sim_trace.txt");
 
-    // the following signals will be traced. Comment any signal you don't want to trace     
-    sca_util::sca_trace(atf, i_tot_sc, "i_tot_sc" );
-    sca_util::sca_trace(atf, v_supercap, "v_supercap" );
-    sca_util::sca_trace(atf, e_supercap, "e_supercap" );
-    sca_util::sca_trace(atf, soc_supercap, "soc_supercap" );
+    // the following signals will be traced. Comment any signal you don't want to trace
+    sca_util::sca_trace(atf, i_tot_batt, "Requested I batt |");    
+    sca_util::sca_trace(atf, i_tot_sc, "Requested I SC |" );
+    sca_util::sca_trace(atf, i_supercap, "Actual I SC (A) |");
+    sca_util::sca_trace(atf, v_supercap, "V SC |" );
+    //sca_util::sca_trace(atf, e_supercap, "e_supercap" );
+    sca_util::sca_trace(atf, soc_supercap, "SoC SC |" );
 
     cout<<"The simulation starts!"<<endl;
 

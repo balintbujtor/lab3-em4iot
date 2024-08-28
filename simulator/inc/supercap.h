@@ -20,13 +20,13 @@ SC_MODULE(supercap)
         supercap_eln eln_module;
         supercap_tdf tdf_module;
 
-        supercap( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 500000.0, double r_s_par = 0.08): 
+        supercap( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 500000.0, double r_s_par = 0.08, double v_max_par = 3.0): 
                                 pI_in("pI_in"),
                                 pV_out("pV_out"),
                                 pE_out("pE_out"),
                                 pSoC_out("pSoC_out"),
-                                eln_module("eln_module", c_par, r_l_par, r_s_par),
-                                tdf_module("tdf_module", c_par)
+                                eln_module("eln_module", c_par, r_l_par, r_s_par, v_max_par),
+                                tdf_module("tdf_module", c_par, v_max_par)
         {
 
             eln_module.pI_in(pI_in);
@@ -39,7 +39,5 @@ SC_MODULE(supercap)
         }
 
 };
-
-//TODO: test with the simulator
 
 #endif

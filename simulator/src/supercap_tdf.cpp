@@ -6,9 +6,6 @@ void supercap_tdf::set_attributes()
     pSoC_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pV_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 
-    pE_out.set_delay(1);
-    pSoC_out.set_delay(1);
-    pV_out.set_delay(1);
 }
 
 void supercap_tdf::initialize(){}
@@ -19,17 +16,17 @@ void supercap_tdf::processing()
     double tmp_v;
 
     tmp_v = pV_in.read();
-    cout << "Voltage value: " << tmp_v << " @" << sc_time_stamp() << endl;
 
     if(tmp_v <= 0)
     {
         cout << "ERROR: 0 or less voltage value" << " @" << sc_time_stamp() << "Value V=" << tmp_v << endl;
         sc_stop();
     }
-    if(tmp_v > VREF_BUS)
+    if(tmp_v > MAX_V)
     {
-        cout << "Voltage is greatar than VREF_BUS" << " @" << sc_time_stamp() << "Value V=" << tmp_v << endl;
-        tmp_v = VREF_BUS;
+        //? if the voltage can be set from eln maybe this is not needed
+        cout << "Voltage is greatar than maximum V of supercap" << " @" << sc_time_stamp() << "Value V=" << tmp_v << endl;
+        tmp_v = MAX_V;
     }
 
     pV_out.write(tmp_v);

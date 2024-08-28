@@ -5,11 +5,9 @@
 SCA_TDF_MODULE(supercap_converter)
 {
     sca_tdf::sca_in<double> pI_bus; // Current requested/delivered to supercapacitor
-    sca_tdf::sca_in<double> pV_sc; //  Supercapacitor voltage
     sca_tdf::sca_out<double> pI_sc; // Supercapacitor current
 
     SCA_CTOR(supercap_converter): pI_bus("pI_bus"),
-                            pV_sc("pV_sc"),
                             pI_sc("pI_sc") {};
 
     void set_attributes();
