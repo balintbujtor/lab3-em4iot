@@ -27,10 +27,8 @@ int sc_main(int argc, char* argv[])
     sca_tdf::sca_signal<double> v_pv1, i_pv1, real_i_pv1;
     sca_tdf::sca_signal<double> i_tot_batt, i_tot_sc;
 
-    sca_tdf::sca_signal<double> i_supercap;
-    sca_tdf::sca_signal<double> v_supercap;
-    sca_tdf::sca_signal<double> e_supercap;
-    sca_tdf::sca_signal<double> soc_supercap;
+    sca_tdf::sca_signal<double> i_supercap, v_supercap, e_supercap, soc_supercap;
+
 
     // Instantiate modules
     bus bus("bus");
@@ -90,21 +88,20 @@ int sc_main(int argc, char* argv[])
     bus.i_methane_sensor(i_methane_sensor);
     bus.i_temperature_sensor(i_temperature_sensor);
     bus.i_mic_click_sensor(i_mic_click_sensor);
+    bus.soc_battery(soc);
+    bus.soc_supercap(soc_supercap);
 
     // define simulation file
     sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file("sim_trace.txt");
 
     // the following signals will be traced. Comment any signal you don't want to trace
-        // tracing only one panel because they are connected in parallel
-    sca_util::sca_trace(atf, i_pv1, "i_pv1" );
-    sca_util::sca_trace(atf, v_pv1, "v_pv1" );
     sca_util::sca_trace(atf, real_i_pv1, "real_i_pv1" );
     sca_util::sca_trace(atf, i_tot_batt, "Requested I batt |");    
     sca_util::sca_trace(atf, i_tot_sc, "Requested I SC |" );
     sca_util::sca_trace(atf, i_supercap, "Actual I SC (A) |");
     sca_util::sca_trace(atf, v_supercap, "V SC |" );
-    //sca_util::sca_trace(atf, e_supercap, "e_supercap" );
     sca_util::sca_trace(atf, soc_supercap, "SoC SC |" );
+    sca_util::sca_trace(atf, soc, "SoC Batt |");
 
     cout<<"The simulation starts!"<<endl;
 

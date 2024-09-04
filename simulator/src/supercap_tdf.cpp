@@ -6,6 +6,8 @@ void supercap_tdf::set_attributes()
     pSoC_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
     pV_out.set_timestep(SIM_STEP, sc_core::SC_SEC);
 
+    pSoC_out.set_delay(1);
+
 }
 
 void supercap_tdf::initialize(){}
@@ -31,7 +33,12 @@ void supercap_tdf::processing()
 
     pV_out.write(tmp_v);
 
-    E_val = 0.5 * C * tmp_v * tmp_v;
+    if( tmp_v == 0){
+        E_val = 0;
+    }
+    else {
+        E_val = 0.5 * C * tmp_v * tmp_v;
+    }
     
     pE_out.write(E_val);
 

@@ -4,7 +4,6 @@
 #include <systemc-ams.h>
 #include "config.h"
 
-//TODO: check if the voltage can go above the maximum specified and if yes check how to limit it
 
 SC_MODULE(supercap_eln)
 {
