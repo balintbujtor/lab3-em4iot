@@ -20,7 +20,7 @@ SC_MODULE(supercap)
         supercap_eln eln_module;
         supercap_tdf tdf_module;
 
-        supercap( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 500000.0, double r_s_par = 0.08, double v_max_par = 3.0): 
+        supercap( sc_core::sc_module_name nm, double c_par = 3.0, double r_l_par = 430000.0, double r_s_par = 0.062, double v_max_par = 3.0): 
                                 pI_in("pI_in"),
                                 pV_out("pV_out"),
                                 pE_out("pE_out"),
