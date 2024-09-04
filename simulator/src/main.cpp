@@ -95,13 +95,21 @@ int sc_main(int argc, char* argv[])
     sca_util::sca_trace_file* atf = sca_util::sca_create_tabular_trace_file("sim_trace.txt");
 
     // the following signals will be traced. Comment any signal you don't want to trace
-    sca_util::sca_trace(atf, real_i_pv1, "real_i_pv1" );
+    sca_util::sca_trace(atf, soc, "SoC Batt |");
+    sca_util::sca_trace(atf, soc_supercap, "SoC SC |" );
     sca_util::sca_trace(atf, i_tot_batt, "Requested I batt |");    
     sca_util::sca_trace(atf, i_tot_sc, "Requested I SC |" );
     sca_util::sca_trace(atf, i_supercap, "Actual I SC (A) |");
+    sca_util::sca_trace(atf, real_i_pv1, "real_i_pv1" );
+    sca_util::sca_trace(atf, i_mcu, "I MCU |" );
+    sca_util::sca_trace(atf, i_rf, "I RF |" );
+    sca_util::sca_trace(atf, i_air_quality_sensor, "I Air Quality |" );
+    sca_util::sca_trace(atf, i_methane_sensor, "I Methane |" );
+    sca_util::sca_trace(atf, i_temperature_sensor, "I Temperature |" );
+    sca_util::sca_trace(atf, i_mic_click_sensor, "I Mic Click |" );
+    sca_util::sca_trace(atf, v_pv1, "V PV1 |" );
     sca_util::sca_trace(atf, v_supercap, "V SC |" );
-    sca_util::sca_trace(atf, soc_supercap, "SoC SC |" );
-    sca_util::sca_trace(atf, soc, "SoC Batt |");
+    sca_util::sca_trace(atf, v_batt, "V Batt |" );
 
     cout<<"The simulation starts!"<<endl;
 

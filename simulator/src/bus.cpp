@@ -7,7 +7,7 @@ void bus::initialize() {}
 
 void bus::processing()
 {
-    const double supercap_limit = 225; // mA for 40s supply
+    const double supercap_limit = 300; // mA for 40s supply
     const double supercap_request_threshold = 50; //above this we use the supercap
 
     double tot_requested, tot_consumed, tot_batt_requested, tot_sc_requested, tot_scavenged;
@@ -28,7 +28,7 @@ void bus::processing()
 
     if(tot_requested > 0){
         // using the energy storage devices
-        if(soc_sc > 0.2){
+        if(soc_sc > 0.1){
             //if we have enough soc in the capacitor
 
             if(tot_requested > supercap_request_threshold && tot_requested < supercap_limit){
